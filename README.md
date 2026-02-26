@@ -2,7 +2,7 @@
 
 A web tool for computing and visualizing integrals — from basic definite integrals to surface integrals and flux. Built for exploring vector calculus interactively.
 
-[**Live Demo**](https://erikloffelholz.github.io/integration-visualizer/) · [API Docs (local)](http://localhost:8000/api/docs)
+[**Live Demo**](https://erik2810.github.io/integration-visualizer/) · [API Docs (local)](http://localhost:8000/api/docs)
 
 ## What it does
 
