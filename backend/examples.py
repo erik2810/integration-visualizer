@@ -1,0 +1,106 @@
+"""Example integrals by type."""
+
+from __future__ import annotations
+
+
+def get_examples() -> dict:
+    """Return example integrals for each dimension and type."""
+    return {
+        '1d': [
+            {'name': 'Polynomial', 'integrand': 'x^2', 'lower_bound': '0', 'upper_bound': '1'},
+            {'name': 'Trigonometric', 'integrand': 'sin(x)', 'lower_bound': '0', 'upper_bound': 'pi'},
+            {'name': 'Gaussian', 'integrand': 'exp(-x^2)', 'lower_bound': '-3', 'upper_bound': '3'},
+            {'name': 'Rational', 'integrand': '1/(1+x^2)', 'lower_bound': '-10', 'upper_bound': '10'},
+            {'name': 'Fresnel Sine', 'integrand': 'sin(x^2)', 'lower_bound': '0', 'upper_bound': '5'},
+            {'name': 'Sinc Function', 'integrand': 'sin(x)/x', 'lower_bound': '0.001', 'upper_bound': '10'},
+        ],
+        '2d': [
+            {'name': 'Rectangle - Polynomial', 'integrand': 'x^2 + y^2', 'region': {'type': 'rectangle', 'x_min': 0, 'x_max': 1, 'y_min': 0, 'y_max': 1}},
+            {'name': 'Disk - Area (pi)', 'integrand': '1', 'region': {'type': 'disk', 'center': [0, 0], 'radius': 1}},
+            {'name': 'Disk - Gaussian', 'integrand': 'exp(-(x^2 + y^2))', 'region': {'type': 'disk', 'center': [0, 0], 'radius': 3}},
+            {'name': 'Type 1 - Under Parabola', 'integrand': 'x*y', 'region': {'type': 'type_1', 'x_min': 0, 'x_max': 1, 'y_lower': '0', 'y_upper': 'x^2'}},
+            {'name': 'Type 2 - Between Curves', 'integrand': '1', 'region': {'type': 'type_2', 'y_min': 0, 'y_max': 1, 'x_lower': 'y^2', 'x_upper': 'sqrt(y)'}},
+            {'name': '2D Moment of Inertia', 'integrand': 'x^2 + y^2', 'region': {'type': 'disk', 'center': [0, 0], 'radius': 1}},
+        ],
+        '3d': [
+            {'name': 'Unit Cube Volume', 'integrand': '1', 'region': {'type': 'box', 'x_min': 0, 'x_max': 1, 'y_min': 0, 'y_max': 1, 'z_min': 0, 'z_max': 1}},
+            {'name': 'Sphere Volume (4pi/3)', 'integrand': '1', 'region': {'type': 'sphere', 'center': [0, 0, 0], 'radius': 1}},
+            {'name': 'Cylinder Volume', 'integrand': '1', 'region': {'type': 'cylinder', 'center': [0, 0], 'radius': 1, 'z_min': 0, 'z_max': 2}},
+            {'name': 'Sphere - Distance sq', 'integrand': 'x^2 + y^2 + z^2', 'region': {'type': 'sphere', 'center': [0, 0, 0], 'radius': 1}},
+            {'name': '3D Moment of Inertia', 'integrand': 'x^2 + y^2', 'region': {'type': 'cylinder', 'center': [0, 0], 'radius': 1, 'z_min': 0, 'z_max': 1}},
+            {'name': 'Mass (Variable Density)', 'integrand': '1 + x + y + z', 'region': {'type': 'box', 'x_min': 0, 'x_max': 1, 'y_min': 0, 'y_max': 1, 'z_min': 0, 'z_max': 1}},
+        ],
+        'line_scalar': [
+            {'name': 'Circle Arc Length (2pi)', 'integrand': '1', 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': '2*pi', 'description': 'Circumference of unit circle'},
+            {'name': 'Helix Arc Length', 'integrand': '1', 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': 't/(2*pi)'}, 't_start': 0, 't_end': '2*pi', 'description': 'One turn of helix'},
+            {'name': 'Parabola Arc', 'integrand': '1', 'curve': {'x': 't', 'y': 't^2', 'z': '0'}, 't_start': 0, 't_end': 1, 'description': 'Arc length of y=x^2'},
+            {'name': 'Wire Mass (rho=r)', 'integrand': 'sqrt(x^2 + y^2)', 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': 'pi', 'description': 'Mass with radial density'},
+            {'name': 'Spiral Arc', 'integrand': '1', 'curve': {'x': 't*cos(t)', 'y': 't*sin(t)', 'z': '0'}, 't_start': 0, 't_end': '4*pi', 'description': 'Archimedean spiral'},
+            {'name': 'Trefoil Knot', 'integrand': '1', 'curve': {'x': 'sin(t)+2*sin(2*t)', 'y': 'cos(t)-2*cos(2*t)', 'z': '-sin(3*t)'}, 't_start': 0, 't_end': '2*pi', 'description': 'Length of trefoil knot'},
+        ],
+        'line_vector': [
+            {'name': 'Circulation (2pi)', 'vector_field': {'x': '-y', 'y': 'x', 'z': '0'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': '2*pi', 'description': 'Vortex field circulation'},
+            {'name': 'Conservative Field (0)', 'vector_field': {'x': '2*x', 'y': '2*y', 'z': '0'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': '2*pi', 'description': 'Closed loop in grad(x^2+y^2)'},
+            {'name': 'Work Against Gravity', 'vector_field': {'x': '0', 'y': '0', 'z': '-9.8'}, 'curve': {'x': 't', 'y': '0', 'z': 't'}, 't_start': 0, 't_end': 1, 'description': 'Lifting mass along ramp'},
+            {'name': 'Helix in Vortex', 'vector_field': {'x': '-y', 'y': 'x', 'z': '1'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': 't/(2*pi)'}, 't_start': 0, 't_end': '2*pi', 'description': 'Work along helix'},
+            {'name': 'Coulomb Force Work', 'vector_field': {'x': 'x/(x^2+y^2+z^2)^(3/2)', 'y': 'y/(x^2+y^2+z^2)^(3/2)', 'z': 'z/(x^2+y^2+z^2)^(3/2)'}, 'curve': {'x': '2+cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': '2*pi', 'description': 'Work in electric field'},
+            {'name': 'Magnetic Lorentz', 'vector_field': {'x': '-z', 'y': '0', 'z': 'x'}, 'curve': {'x': 'cos(t)', 'y': 't', 'z': 'sin(t)'}, 't_start': 0, 't_end': '2*pi', 'description': 'Work in magnetic field'},
+        ],
+        'surface_scalar': [
+            {'name': 'Hemisphere Area (2pi)', 'integrand': '1', 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi/2'], 'v_range': [0, '2*pi'], 'description': 'Upper hemisphere'},
+            {'name': 'Full Sphere (4pi)', 'integrand': '1', 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'Complete unit sphere'},
+            {'name': 'Paraboloid', 'integrand': '1', 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': 'u^2'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'description': 'z = x^2 + y^2'},
+            {'name': 'Torus (Major)', 'integrand': '1', 'surface': {'x': '(2+cos(v))*cos(u)', 'y': '(2+cos(v))*sin(u)', 'z': 'sin(v)'}, 'u_range': [0, '2*pi'], 'v_range': [0, '2*pi'], 'description': 'Torus R=2, r=1'},
+            {'name': 'Helicoid', 'integrand': '1', 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': 'v'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'description': 'Spiral ramp surface'},
+            {'name': 'Mobius Strip', 'integrand': '1', 'surface': {'x': '(1+u*cos(v/2))*cos(v)', 'y': '(1+u*cos(v/2))*sin(v)', 'z': 'u*sin(v/2)'}, 'u_range': [-0.3, 0.3], 'v_range': [0, '2*pi'], 'description': 'Non-orientable surface'},
+            {'name': 'Cone', 'integrand': '1', 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': 'u'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'description': 'z = sqrt(x^2+y^2)'},
+            {'name': "Enneper's Surface", 'integrand': '1', 'surface': {'x': 'u - u^3/3 + u*v^2', 'y': 'v - v^3/3 + v*u^2', 'z': 'u^2 - v^2'}, 'u_range': [-1, 1], 'v_range': [-1, 1], 'description': 'Minimal surface'},
+        ],
+        'flux': [
+            {'name': 'Radial Flux (Hemisphere)', 'vector_field': {'x': 'x', 'y': 'y', 'z': 'z'}, 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi/2'], 'v_range': [0, '2*pi'], 'description': 'F = r through hemisphere'},
+            {'name': "Gauss's Law (4pi)", 'vector_field': {'x': 'x/(x^2+y^2+z^2)^(3/2)', 'y': 'y/(x^2+y^2+z^2)^(3/2)', 'z': 'z/(x^2+y^2+z^2)^(3/2)'}, 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'Electric flux from point charge'},
+            {'name': 'Uniform Flow (pi)', 'vector_field': {'x': '0', 'y': '0', 'z': '1'}, 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': '0'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'description': 'Vertical flow through disk'},
+            {'name': 'Vortex Through Disk', 'vector_field': {'x': '-y', 'y': 'x', 'z': '0'}, 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': '1'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'description': 'Rotation field flux'},
+            {'name': 'Divergence Theorem', 'vector_field': {'x': 'x^2', 'y': 'y^2', 'z': 'z^2'}, 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'iint F.n = iiint div F'},
+            {'name': 'Heat Flux (Sphere)', 'vector_field': {'x': '-x/(x^2+y^2+z^2)', 'y': '-y/(x^2+y^2+z^2)', 'z': '-z/(x^2+y^2+z^2)'}, 'surface': {'x': '2*sin(u)*cos(v)', 'y': '2*sin(u)*sin(v)', 'z': '2*cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'Heat from point source'},
+        ],
+        'vector_operations': [
+            {'name': 'Gradient: Distance', 'operation': 'gradient', 'scalar_field': 'sqrt(x^2 + y^2 + z^2)', 'description': 'grad r = r_hat'},
+            {'name': 'Gradient: Coulomb', 'operation': 'gradient', 'scalar_field': '1/sqrt(x^2 + y^2 + z^2)', 'description': 'Electric potential'},
+            {'name': 'Gradient: Quadratic', 'operation': 'gradient', 'scalar_field': 'x^2 + 2*y^2 + 3*z^2', 'description': 'Ellipsoid potential'},
+            {'name': 'Divergence: Position', 'operation': 'divergence', 'vector_field': {'x': 'x', 'y': 'y', 'z': 'z'}, 'description': 'div r = 3'},
+            {'name': 'Divergence: Inverse sq', 'operation': 'divergence', 'vector_field': {'x': 'x/(x^2+y^2+z^2)^(3/2)', 'y': 'y/(x^2+y^2+z^2)^(3/2)', 'z': 'z/(x^2+y^2+z^2)^(3/2)'}, 'description': 'div(r_hat/r^2) = 0'},
+            {'name': 'Curl: Rotation', 'operation': 'curl', 'vector_field': {'x': '-y', 'y': 'x', 'z': '0'}, 'description': 'curl(-y,x,0) = 2k_hat'},
+            {'name': 'Curl: Conservative', 'operation': 'curl', 'vector_field': {'x': 'y*z', 'y': 'x*z', 'z': 'x*y'}, 'description': 'curl grad(xyz) = 0'},
+            {'name': 'Curl: Magnetic', 'operation': 'curl', 'vector_field': {'x': '-y/(x^2+y^2)', 'y': 'x/(x^2+y^2)', 'z': '0'}, 'description': 'Wire magnetic field'},
+        ],
+        'vector_fields': [
+            {'name': 'Uniform Flow', 'vector_field': {'x': '1', 'y': '0', 'z': '0'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -2, 'z_max': 2}, 'description': 'Constant velocity'},
+            {'name': 'Radial Source', 'vector_field': {'x': 'x', 'y': 'y', 'z': 'z'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -2, 'z_max': 2}, 'description': 'Expanding flow'},
+            {'name': 'Vortex (z-axis)', 'vector_field': {'x': '-y', 'y': 'x', 'z': '0'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -1, 'z_max': 1}, 'description': 'Rotation about z'},
+            {'name': 'Saddle Point', 'vector_field': {'x': 'x', 'y': '-y', 'z': '0'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -1, 'z_max': 1}, 'description': 'Hyperbolic flow'},
+            {'name': 'Sink (Gravity)', 'vector_field': {'x': '-x/(x^2+y^2+z^2)^(3/2)', 'y': '-y/(x^2+y^2+z^2)^(3/2)', 'z': '-z/(x^2+y^2+z^2)^(3/2)'}, 'region': {'x_min': -3, 'x_max': 3, 'y_min': -3, 'y_max': 3, 'z_min': -3, 'z_max': 3}, 'description': 'Gravitational field'},
+            {'name': 'Dipole', 'vector_field': {'x': '3*x*z/(x^2+y^2+z^2)^(5/2)', 'y': '3*y*z/(x^2+y^2+z^2)^(5/2)', 'z': '(2*z^2-x^2-y^2)/(x^2+y^2+z^2)^(5/2)'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -2, 'z_max': 2}, 'description': 'Magnetic dipole'},
+            {'name': 'Helix Flow', 'vector_field': {'x': '-y', 'y': 'x', 'z': '1'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': 0, 'z_max': 3}, 'description': 'Spiral motion'},
+            {'name': 'Shear Flow', 'vector_field': {'x': 'y', 'y': '0', 'z': '0'}, 'region': {'x_min': -2, 'x_max': 2, 'y_min': -2, 'y_max': 2, 'z_min': -1, 'z_max': 1}, 'description': 'Velocity gradient'},
+        ],
+        'physics': [
+            {'name': 'Point Charge E-field', 'category': 'electromagnetism', 'type': 'vector_field', 'vector_field': {'x': 'x/(x^2+y^2+z^2)^(3/2)', 'y': 'y/(x^2+y^2+z^2)^(3/2)', 'z': 'z/(x^2+y^2+z^2)^(3/2)'}, 'description': 'E = kq/r^2 radial field', 'physics_note': 'Coulombs law: F = kq1q2/r^2'},
+            {'name': 'Parallel Plate Capacitor', 'category': 'electromagnetism', 'type': 'vector_field', 'vector_field': {'x': '0', 'y': '0', 'z': '1'}, 'description': 'Uniform E between plates', 'physics_note': 'E = sigma/epsilon_0'},
+            {'name': 'Infinite Wire B-field', 'category': 'electromagnetism', 'type': 'vector_field', 'vector_field': {'x': '-y/(x^2+y^2)', 'y': 'x/(x^2+y^2)', 'z': '0'}, 'description': 'B = mu_0 I/(2 pi r) circular', 'physics_note': 'Amperes law for infinite wire'},
+            {'name': 'Gauss Law Sphere', 'category': 'electromagnetism', 'type': 'flux', 'vector_field': {'x': 'x/(x^2+y^2+z^2)^(3/2)', 'y': 'y/(x^2+y^2+z^2)^(3/2)', 'z': 'z/(x^2+y^2+z^2)^(3/2)'}, 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'Flux = 4pi (Gauss law)', 'physics_note': 'E.dA = Q/epsilon_0'},
+            {'name': 'Laminar Pipe Flow', 'category': 'fluids', 'type': 'vector_field', 'vector_field': {'x': '0', 'y': '0', 'z': '1-x^2-y^2'}, 'description': 'Poiseuille flow (parabolic)', 'physics_note': 'v(r) = v_max(1-r^2/R^2)'},
+            {'name': 'Vortex (Tornado)', 'category': 'fluids', 'type': 'vector_field', 'vector_field': {'x': '-y/(x^2+y^2)', 'y': 'x/(x^2+y^2)', 'z': '0.5'}, 'description': 'Irrotational vortex + updraft', 'physics_note': 'v_theta = Gamma/(2 pi r)'},
+            {'name': 'Gravitational Field', 'category': 'mechanics', 'type': 'vector_field', 'vector_field': {'x': '-x/(x^2+y^2+z^2)^(3/2)', 'y': '-y/(x^2+y^2+z^2)^(3/2)', 'z': '-z/(x^2+y^2+z^2)^(3/2)'}, 'description': 'g = -GM/r^2 radial', 'physics_note': 'Newtons gravitation'},
+            {'name': 'Work Against Gravity', 'category': 'mechanics', 'type': 'line_vector', 'vector_field': {'x': '0', 'y': '0', 'z': '-1'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': 't/(2*pi)'}, 't_start': 0, 't_end': '2*pi', 'description': 'W = integral F.dr along helix', 'physics_note': 'Work = mgh'},
+            {'name': 'Moment of Inertia (Disk)', 'category': 'mechanics', 'type': '2d', 'integrand': 'x^2 + y^2', 'region': {'type': 'disk', 'center': [0, 0], 'radius': 1}, 'description': 'I = integral r^2 dm', 'physics_note': 'For uniform disk: I = MR^2/2'},
+            {'name': 'Ground State H-atom', 'category': 'quantum', 'type': '3d', 'integrand': 'exp(-2*sqrt(x^2+y^2+z^2))', 'region': {'type': 'sphere', 'center': [0, 0, 0], 'radius': 3}, 'description': '|psi|^2 for 1s orbital', 'physics_note': 'psi = e^(-r/a_0)/sqrt(pi)'},
+            {'name': 'Harmonic Oscillator', 'category': 'quantum', 'type': '1d', 'integrand': 'exp(-x^2)', 'lower_bound': '-5', 'upper_bound': '5', 'description': '|psi_0|^2 ground state', 'physics_note': 'Quantum harmonic oscillator'},
+        ],
+        'theorems': [
+            {'name': "Green's Theorem (Area)", 'type': 'greens', 'vector_field': {'x': '-y/2', 'y': 'x/2'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)'}, 't_start': 0, 't_end': '2*pi', 'description': 'oint(-y dx + x dy)/2 = Area', 'expected': 'pi'},
+            {'name': "Green's Theorem (General)", 'type': 'greens', 'vector_field': {'x': 'x^2', 'y': 'x*y'}, 'curve': {'x': 'cos(t)', 'y': 'sin(t)'}, 't_start': 0, 't_end': '2*pi', 'description': 'oint P dx + Q dy = iint(dQ/dx - dP/dy)dA'},
+            {'name': "Stokes' Theorem", 'type': 'stokes', 'vector_field': {'x': '-y', 'y': 'x', 'z': 'z^2'}, 'surface': {'x': 'u*cos(v)', 'y': 'u*sin(v)', 'z': '0'}, 'u_range': [0, 1], 'v_range': [0, '2*pi'], 'curve': {'x': 'cos(t)', 'y': 'sin(t)', 'z': '0'}, 't_start': 0, 't_end': '2*pi', 'description': 'oint F.dr = iint(curl F).dS'},
+            {'name': 'Divergence Theorem', 'type': 'divergence', 'vector_field': {'x': 'x', 'y': 'y', 'z': 'z'}, 'surface': {'x': 'sin(u)*cos(v)', 'y': 'sin(u)*sin(v)', 'z': 'cos(u)'}, 'u_range': [0, 'pi'], 'v_range': [0, '2*pi'], 'description': 'iint F.n dS = iiint div F dV', 'expected': '4pi (since div r = 3)'},
+        ],
+    }

@@ -1,0 +1,32 @@
+export const COLORS = {
+  bg: '#0a0a0f',
+  surface: '#12121a',
+  surfaceHover: '#1a1a25',
+  border: '#2a2a3a',
+  borderHover: '#3a3a5a',
+  primary: '#6366f1',
+  primaryHover: '#818cf8',
+  accent: '#22d3ee',
+  accentDim: '#0891b2',
+  success: '#10b981',
+  warning: '#f59e0b',
+  error: '#ef4444',
+  text: '#e2e8f0',
+  textMuted: '#94a3b8',
+  textDim: '#64748b',
+};
+
+export const INTEGRAL_TYPES = [
+  { value: '1d', label: '\u222B', desc: '1D Integral' },
+  { value: '2d', label: '\u222C', desc: '2D Integral' },
+  { value: '3d', label: '\u222D', desc: '3D Integral' },
+  { value: 'line_scalar', label: '\u222Bds', desc: 'Arc Length' },
+  { value: 'line_vector', label: '\u222BF\u00B7dr', desc: 'Work/Circ' },
+  { value: 'surface_scalar', label: '\u222CdS', desc: 'Surf. Area' },
+  { value: 'flux', label: '\u222CF\u00B7n', desc: 'Flux' },
+  { value: 'vector_operations', label: '\u2207', desc: 'Grad/Div/Curl' },
+  { value: 'vector_fields', label: '\u27F6', desc: 'Vector Field' },
+  { value: 'theorems', label: '\u27FA', desc: 'Theorems' },
+  { value: 'physics', label: '\u269B', desc: 'Physics' },
+  { value: 'field_lines', label: '\u3030', desc: 'Field Lines' },
+];
